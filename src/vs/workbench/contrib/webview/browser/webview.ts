@@ -112,6 +112,7 @@ export interface Webview extends IDisposable {
 	postMessage(data: any): void;
 
 	focus(): void;
+	blur(): void;
 	reload(): void;
 
 	showFind(): void;

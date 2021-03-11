@@ -52,6 +52,7 @@ import { IDialogService, IFileDialogService, ConfirmResult } from 'vs/platform/d
 import { ILogService } from 'vs/platform/log/common/log';
 import { Codicon } from 'vs/base/common/codicons';
 import { IFilesConfigurationService, AutoSaveMode } from 'vs/workbench/services/filesConfiguration/common/filesConfigurationService';
+import { IWebviewService } from 'vs/workbench/contrib/webview/browser/webview';
 
 export class EditorGroupView extends Themable implements IEditorGroupView {
 
@@ -139,7 +140,8 @@ export class EditorGroupView extends Themable implements IEditorGroupView {
 		@IFileDialogService private readonly fileDialogService: IFileDialogService,
 		@ILogService private readonly logService: ILogService,
 		@IEditorService private readonly editorService: EditorServiceImpl,
-		@IFilesConfigurationService private readonly filesConfigurationService: IFilesConfigurationService
+		@IFilesConfigurationService private readonly filesConfigurationService: IFilesConfigurationService,
+		@IWebviewService private readonly webviewService: IWebviewService,
 	) {
 		super(themeService);
 
@@ -977,6 +979,11 @@ export class EditorGroupView extends Themable implements IEditorGroupView {
 	}
 
 	private async doShowEditor(editor: EditorInput, context: { active: boolean, isNew: boolean }, options?: EditorOptions): Promise<IEditorPane | undefined> {
+
+		// If a webview is considered "focused", tell it that it has lost focus
+		if (this.webviewService.activeWebview) {
+			this.webviewService.activeWebview.blur();
+		}
 
 		// Show in editor control if the active editor changed
 		let openEditorPromise: Promise<IEditorPane | undefined> | undefined;

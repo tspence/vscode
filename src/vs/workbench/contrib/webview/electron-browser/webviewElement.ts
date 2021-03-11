@@ -226,6 +226,10 @@ export class ElectronWebviewBasedWebview extends BaseWebview<WebviewTag> impleme
 		this.handleFocusChange(true);
 	}
 
+	public blur(): void {
+		this.handleFocusChange(false);
+	}
+
 	private doFocus() {
 		if (!this.element) {
 			return;

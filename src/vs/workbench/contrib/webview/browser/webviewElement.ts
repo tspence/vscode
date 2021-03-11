@@ -160,6 +160,12 @@ export class IFrameWebview extends BaseWebview<HTMLIFrameElement> implements Web
 		}
 	}
 
+	blur(): void {
+		if (this.element) {
+			this._send('blur');
+		}
+	}
+
 	showFind(): void {
 		throw new Error('Method not implemented.');
 	}

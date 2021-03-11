@@ -123,6 +123,10 @@ export class ElectronIframeWebview extends IFrameWebview {
 		this.handleFocusChange(true);
 	}
 
+	public blur(): void {
+		this.handleFocusChange(false);
+	}
+
 	private doFocus() {
 		if (!this.element) {
 			return;

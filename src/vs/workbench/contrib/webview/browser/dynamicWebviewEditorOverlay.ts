@@ -252,6 +252,7 @@ export class DynamicWebviewEditorOverlay extends Disposable implements WebviewOv
 	}
 
 	focus(): void { this.withWebview(webview => webview.focus()); }
+	blur(): void { this.withWebview(webview => webview.blur()); }
 	reload(): void { this.withWebview(webview => webview.reload()); }
 	selectAll(): void { this.withWebview(webview => webview.selectAll()); }
 	copy(): void { this.withWebview(webview => webview.copy()); }
